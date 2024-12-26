@@ -41,6 +41,21 @@ You can install the required dependencies using:
 pip install gitpython ghlinguist requests pandas openpyxl
 ```
 
+#### **Set up Ruby and Github Linguist**
+This setup only worked on Ubuntu
+1. **Install Ruby and its dependencies**:
+   ```bash
+   sudo apt-get install build-essential cmake pkg-config libicu-dev zlib1g-dev libcurl4-openssl-dev libssl-dev ruby-dev
+   ```
+2. **Verify the Ruby installation**:
+   ```bash
+   ruby --version
+   ```
+3. **Install Github Linguist**:
+   ```bash
+   sudo gem install github-linguist
+   ```
+
 ---
 
 ### **Step-by-Step Guide**
@@ -161,6 +176,58 @@ def save_to_excel(project_languages, overall_languages, output_file):
         overall_df.set_index('Language', inplace=True)
         overall_df.to_excel(writer, sheet_name="Overall Summary")
 ```
+
+---
+
+#### **5. Run the Script**
+
+Once the script is set up, it will:
+- Clone each repository from Bitbucket.
+- Analyze language usage.
+- Save the results in an Excel file.
+
+---
+
+### **Excel Output Structure**
+
+The Excel file will contain:
+1. **Sheets for Each Project**: Each project (A, B, C) will have its own sheet. Each sheet will contain:
+   - **Repositories** as rows.
+   - **Languages** as columns.
+   
+2. **Overall Summary Sheet**: This sheet will contain a summary of all languages used across all repositories, which can be used to generate visualizations like pie charts.
+
+#### Example:
+
+**Sheet: `A`**
+| Repository | Python | JavaScript | HTML |
+| ---------- | ------ | ---------- | ---- |
+| repo1      | 60.0%  | 30.0%      | 10.0%|
+| repo2      | 70.0%  | 20.0%      | 10.0%|
+
+**Sheet: `B`**
+| Repository | Java | Python | JavaScript |
+|------------|------|--------|------------|
+| repo1      | 50.0%| 30.0%  | 20.0%      |
+
+**Overall Summary**
+| Language     | Percentage |
+|--------------|------------|
+| Python       | 35.0%      |
+| JavaScript   | 30.0%      |
+| HTML         | 10.0%      |
+| Java         | 15.0%      |
+| Ruby         | 10.0%      |
+
+---
+
+### **Creating a Pie Chart in Excel**
+
+Once the data is in the **"Overall Summary"** sheet, you can easily create a pie chart to visualize the distribution of languages:
+
+1. Select the **Language** and **Percentage** columns in the **"Overall Summary"** sheet.
+2. Go to the **Insert** tab and select **Pie Chart**.
+3. Excel will automatically create a pie chart, allowing you to visualize the distribution of languages used across all repositories.
 
 ---
 
